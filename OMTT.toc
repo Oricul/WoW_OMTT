@@ -1,7 +1,7 @@
 ## Interface: 11505
 ## Title: Ori's Mouse ToolTip
 ## Author: Ori
-## Version: 0.1
+## Version: 1.0.0
 ## Notes: Binds tooltips to your mouse.
 ## SavedVariables: OMTT_DB
 
