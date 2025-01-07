@@ -61,7 +61,7 @@ jobs:
           cp -r Core.lua embeds.xml Localization.lua Options.lua OMTT.toc LICENSE Libs OMTT/
           zip -r OMTT-${{ env.TAG_NAME }}.zip OMTT
 
-      # Step 9: Upload to GitHub Release
+      # Step 9: Upload the release to GitHub
       - name: Upload release
         uses: ncipollo/release-action@v1
         with:
