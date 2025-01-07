@@ -1,0 +1,10 @@
+## Interface: 11505
+## Title: Ori's Mouse ToolTip
+## Author: Ori
+## Version: 0.1
+## Notes: Binds tooltips to your mouse.
+## SavedVariables: OMTT_DB
+
+Localization.lua
+Core.lua
+Options.lua
