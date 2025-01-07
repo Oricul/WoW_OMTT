@@ -54,7 +54,8 @@ jobs:
       - name: Read changelog
         id: changelog
         run: |
-          echo "CHANGELOG_BODY=$(cat CHANGELOG.md)" >> $GITHUB_ENV
+          CHANGELOG_CONTENT=$(cat CHANGELOG.md)
+          printf "CHANGELOG_BODY=%s\n" "$CHANGELOG_CONTENT" >> $GITHUB_ENV
 
       # Step 8: Prepare the package
       - name: Create addon package
