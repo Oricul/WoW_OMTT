@@ -54,8 +54,7 @@ jobs:
       - name: Read changelog
         id: changelog
         run: |
-          CHANGELOG_CONTENT=$(cat CHANGELOG.md)
-          printf "CHANGELOG_BODY=%s\n" "$CHANGELOG_CONTENT" >> $GITHUB_ENV
+          echo "::set-output name=content::$(cat CHANGELOG.md)"
 
       # Step 8: Prepare the package
       - name: Create addon package
@@ -71,5 +70,5 @@ jobs:
           artifacts: OMTT-v${{ env.TAG_NAME }}.zip
           tag: ${{ env.TAG_NAME }}
           name: OMTT Release ${{ env.TAG_NAME }}
-          body: ${{ env.CHANGELOG_BODY }}
+          body: ${{ steps.changelog.outputs.content }}
           token: ${{ secrets.GITHUB_TOKEN }}
