@@ -23,9 +23,11 @@ jobs:
           ruby-version: 3.0
           bundler-cache: true
 
-      # Step 3: Generate the changelog
+      # Step 3: Install dependencies
       - name: Install github-changelog-generator
-        run: gem install github_changelog_generator
+        run: |
+          gem install faraday-retry
+          gem install github_changelog_generator
 
       # Step 4: Check for CHANGELOG_TOKEN
       - name: Check for CHANGELOG_TOKEN
