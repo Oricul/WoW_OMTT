@@ -1,0 +1,14 @@
+# Required settings
+user: Oricul
+project: WoW_OMTT
+
+# Optional settings
+since-tag: v1.0.0        # Generate changelog since a specific tag
+output: CHANGELOG.md     # Output filename
+enhancement-labels:      # Labels for enhancements
+  - "feature"
+bugs-labels:             # Labels for bug fixes
+  - "bug"
+issues-labels:           # Labels for general issues
+  - "documentation"
+header: "# Changelog"    # Custom header for the changelog
