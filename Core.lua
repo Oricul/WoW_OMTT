@@ -256,6 +256,7 @@ local function EnhanceTooltipContent(tooltip)
             local guildName = GetGuildInfo(unit)
             if guildName then
                 tooltip:AddLine("<" .. guildName .. ">", 0, 1, 0)
+                tooltip:Show()
             end
 
             -- Debugging to ensure we're hitting the logic
@@ -276,14 +277,20 @@ local eventFrame = CreateFrame("Frame")
 eventFrame:RegisterEvent("UPDATE_MOUSEOVER_UNIT")
 
 -- Event handler to update the tooltip dynamically
-eventFrame:SetScript("OnEvent", function(_, event)
-    if event == "UPDATE_MOUSEOVER_UNIT" then
-        local unit = "mouseover"
-        if UnitExists(unit) and UnitIsPlayer(unit) then
-            EnhanceTooltipContent(GameTooltip)
+if WOW_PROJECT_ID == 1 then
+    eventFrame:SetScript("OnEvent", function(_, event)
+        if event == "UPDATE_MOUSEOVER_UNIT" then
+            local unit = "mouseover"
+            if UnitExists(unit) and UnitIsPlayer(unit) then
+                EnhanceTooltipContent(GameTooltip)
+            end
         end
-    end
-end)
+    end)
+else
+    GameTooltip:HookScript("OnTooltipSetUnit", function(self)
+        EnhanceTooltipContent(self)
+    end)
+end
 
 -- Reset background color when the tooltip is cleared
 GameTooltip:HookScript("OnTooltipCleared", function(self)
