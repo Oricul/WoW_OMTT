@@ -59,6 +59,10 @@ L["Options_UI_TooltipSettings_ClassColorsDesc"] = "Enabling this will set the to
 L["PrintHelp_Command_Colorize"] = "Toggles tooltip coloring based on class."
 L["Cmd_Colorize_Toggled"] = "Class coloring is now "
 L["Cmd_OpenSettings"] = "Opening settings..."
+L["Debug_UnitUpdate"] = "Enhancing Tooltip; Unit: %s; Class: %s; Color: (%f, %f, %f); Guild: %s"
+L["Debug_TooltipClear"] = "Clearing the tooltip..."
+L["Debug_None"] = "None"
+L["Debug_ShowTooltip"] = "Showing tooltip..."
 
 -- Chinese (Simplified, zhCN)
 if GetLocale() == "zhCN" then
