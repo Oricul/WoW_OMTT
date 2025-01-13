@@ -220,6 +220,7 @@ GameTooltip:HookScript("OnUpdate", function(self)
 end)
 GameTooltip:HookScript("OnShow", function(self)
     OMTT:PositionTooltip(self)
+    OriMouseToolTip:OMTTPrint(L["Debug_ShowTooltip"], "debug")
 end)
 
 -- Define a backdrop template for the tooltip
@@ -232,9 +233,9 @@ local BACKDROP_TEMPLATE = {
     insets = { left = 4, right = 4, top = 4, bottom = 4 },
 }
 
--- Enhance tooltip content
-GameTooltip:HookScript("OnTooltipSetUnit", function(self)
-    local _, unit = self:GetUnit()
+-- Enhance tooltip content for Retail
+local function EnhanceTooltipContent(tooltip)
+    local _, unit = tooltip:GetUnit()
     if unit and UnitIsPlayer(unit) then
         if OMTT.db.profile.classColors then
             local classColor = CUSTOM_CLASS_COLORS or RAID_CLASS_COLORS
@@ -242,29 +243,60 @@ GameTooltip:HookScript("OnTooltipSetUnit", function(self)
             local color = classColor[class] or { r = 1, g = 1, b = 1 }
 
             -- Create a background texture if it doesn't already exist
-            if not self.bg then
-                self.bg = self:CreateTexture(nil, "BACKGROUND")
-                self.bg:SetPoint("TOPLEFT", self, "TOPLEFT", 2, -2)
-                self.bg:SetPoint("BOTTOMRIGHT", self, "BOTTOMRIGHT", -2, 2)
-                self.bg:SetColorTexture(0, 0, 0, 0.8)
+            if not tooltip.bg then
+                tooltip.bg = tooltip:CreateTexture(nil, "BACKGROUND")
+                tooltip.bg:SetPoint("TOPLEFT", tooltip, "TOPLEFT", 2, -2)
+                tooltip.bg:SetPoint("BOTTOMRIGHT", tooltip, "BOTTOMRIGHT", -2, 2)
             end
 
             -- Set the background to the player's class color
-            self.bg:SetColorTexture(color.r, color.g, color.b, 0.5)
-        end
+            tooltip.bg:SetColorTexture(color.r, color.g, color.b, 0.5)
 
-        -- Add guild information
-        local guildName = GetGuildInfo(unit)
-        if guildName then
-            self:AddLine("<" .. guildName .. ">", 0, 1, 0)
+            -- Add guild information
+            local guildName = GetGuildInfo(unit)
+            if guildName then
+                tooltip:AddLine("<" .. guildName .. ">", 0, 1, 0)
+                tooltip:Show()
+            end
+
+            -- Debugging to ensure we're hitting the logic
+            OriMouseToolTip:OMTTPrint(string.format(L["Debug_UnitUpdate"],
+                UnitName(unit), class, color.r, color.g, color.b, guildName or L["Debug_None"]
+            ), "debug")
+        end
+    else
+        -- Reset background for non-player tooltips
+        if tooltip.bg then
+            tooltip.bg:SetColorTexture(0, 0, 0, 0.8)
         end
     end
-end)
+end
 
--- Reset background color when tooltip is cleared
+-- Create a frame to handle the UPDATE_MOUSEOVER_UNIT event
+local eventFrame = CreateFrame("Frame")
+eventFrame:RegisterEvent("UPDATE_MOUSEOVER_UNIT")
+
+-- Event handler to update the tooltip dynamically
+if WOW_PROJECT_ID == 1 then
+    eventFrame:SetScript("OnEvent", function(_, event)
+        if event == "UPDATE_MOUSEOVER_UNIT" then
+            local unit = "mouseover"
+            if UnitExists(unit) and UnitIsPlayer(unit) then
+                EnhanceTooltipContent(GameTooltip)
+            end
+        end
+    end)
+else
+    GameTooltip:HookScript("OnTooltipSetUnit", function(self)
+        EnhanceTooltipContent(self)
+    end)
+end
+
+-- Reset background color when the tooltip is cleared
 GameTooltip:HookScript("OnTooltipCleared", function(self)
     if self.bg then
         -- Reset to default color (black with slight transparency)
         self.bg:SetColorTexture(0, 0, 0, 0.8)
+        OriMouseToolTip:OMTTPrint(L["Debug_TooltipClear"], "debug")
     end
 end)
