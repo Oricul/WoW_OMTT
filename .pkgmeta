@@ -1,0 +1,10 @@
+package-as: OMTT
+enable-toc-creation: no
+
+ignore:
+    - .github
+    - .github_changelog_generator
+    - README.md
+
+tools-used:
+    - ace3

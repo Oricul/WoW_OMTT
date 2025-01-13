@@ -6,67 +6,14 @@ on:
       - 'v*'
 
 jobs:
-  build:
+  release:
     runs-on: ubuntu-latest
-
+    env:
+      GITHUB_OAUTH: ${{ secrets.GITHUB_TOKEN }}
     steps:
-      # Step 1: Checkout the repository
-      - name: Checkout code
+      - name: Clone project
         uses: actions/checkout@v3
-
-      # Step 2: Extract the tag name
-      - name: Get the tag name
-        id: tag_name
-        run: |
-          echo "TAG_NAME=${GITHUB_REF#refs/tags/}" >> $GITHUB_ENV
-
-      # Step 3: Install Ruby + Dependencies
-      - name: Install Ruby
-        uses: ruby/setup-ruby@v1
         with:
-          ruby-version: 3.0
-          bundler-cache: true
-
-      # Step 4: Install dependencies
-      - name: Install github-changelog-generator
-        run: |
-          gem install faraday-retry
-          gem install github_changelog_generator
-
-      # Step 5: Check for CHANGELOG_TOKEN
-      - name: Check for CHANGELOG_TOKEN
-        run: |
-          if [ -z "${{ secrets.CHANGELOG_TOKEN }}" ]; then
-            echo "ERROR: CHANGELOG_TOKEN is missing!" >&2
-            exit 1
-          fi
-
-      # Step 6: Generate the changelog
-      - name: Generate changelog
-        run: |
-          github_changelog_generator --user Oricul \
-                                    --project WoW_OMTT \
-                                    --token ${{ secrets.CHANGELOG_TOKEN }}
-
-      # Step 7: Read the CHANGELOG.md
-      - name: Read changelog
-        id: changelog
-        run: |
-          echo "::set-output name=content::$(cat CHANGELOG.md)"
-
-      # Step 8: Prepare the package
-      - name: Create addon package
-        run: |
-          mkdir OMTT
-          cp -r Core.lua embeds.xml Localization.lua Options.lua OMTT.toc LICENSE Libs OMTT/
-          zip -r OMTT-${{ env.TAG_NAME }}.zip OMTT
-
-      # Step 9: Upload the release to GitHub.
-      - name: Upload release
-        uses: ncipollo/release-action@v1
-        with:
-          artifacts: OMTT-${{ env.TAG_NAME }}.zip
-          tag: ${{ env.TAG_NAME }}
-          name: OMTT - ${{ env.TAG_NAME }}
-          body: ${{ steps.changelog.outputs.content }}
-          token: ${{ secrets.GITHUB_TOKEN }}
+          fetch-depth: 0
+      - name: Package and Release
+        uses: BigWigsMods/packager@v2
