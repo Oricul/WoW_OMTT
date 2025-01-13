@@ -120,6 +120,10 @@ if GetLocale() == "zhCN" then
     L["PrintHelp_Command_Colorize"] = "切换基于职业的工具提示着色。"
     L["Cmd_Colorize_Toggled"] = "职业着色现在为 "
     L["Cmd_OpenSettings"] = "正在打开设置..."
+    L["Debug_UnitUpdate"] = "增强工具提示；单位：%s；职业：%s；颜色：(%f, %f, %f)；公会：%s"
+    L["Debug_TooltipClear"] = "清除工具提示..."
+    L["Debug_None"] = "无"
+    L["Debug_ShowTooltip"] = "显示工具提示..."
 end
 
 -- Japanese (jaJP)
@@ -178,6 +182,10 @@ if GetLocale() == "jaJP" then
     L["PrintHelp_Command_Colorize"] = "クラスに基づいてツールチップの色付けを切り替えます。"
     L["Cmd_Colorize_Toggled"] = "クラス着色が現在 "
     L["Cmd_OpenSettings"] = "設定を開いています..."
+    L["Debug_UnitUpdate"] = "ツールチップを強化中；ユニット：%s；クラス：%s；カラー：(%f, %f, %f)；ギルド：%s"
+    L["Debug_TooltipClear"] = "ツールチップをクリア中..."
+    L["Debug_None"] = "なし"
+    L["Debug_ShowTooltip"] = "ツールチップを表示中..."
 end
 
 -- Korean (koKR)
@@ -236,6 +244,10 @@ if GetLocale() == "koKR" then
     L["PrintHelp_Command_Colorize"] = "직업 기반 툴팁 색상을 전환합니다."
     L["Cmd_Colorize_Toggled"] = "직업 색상이 이제 "
     L["Cmd_OpenSettings"] = "설정을 여는 중..."
+    L["Debug_UnitUpdate"] = "툴팁 강화 중; 유닛: %s; 직업: %s; 색상: (%f, %f, %f); 길드: %s"
+    L["Debug_TooltipClear"] = "툴팁을 지우는 중..."
+    L["Debug_None"] = "없음"
+    L["Debug_ShowTooltip"] = "툴팁 표시 중..."
 end
 
 -- Spanish (esES)
@@ -294,6 +306,10 @@ if GetLocale() == "esES" then
     L["PrintHelp_Command_Colorize"] = "Alterna la coloración de tooltips según la clase."
     L["Cmd_Colorize_Toggled"] = "La coloración por clase ahora está "
     L["Cmd_OpenSettings"] = "Abriendo configuración..."
+    L["Debug_UnitUpdate"] = "Mejorando el tooltip; Unidad: %s; Clase: %s; Color: (%f, %f, %f); Hermandad: %s"
+    L["Debug_TooltipClear"] = "Limpiando el tooltip..."
+    L["Debug_None"] = "Ninguno"
+    L["Debug_ShowTooltip"] = "Mostrando tooltip..."
 end
 
 -- French (frFR)
@@ -352,6 +368,10 @@ if GetLocale() == "frFR" then
     L["PrintHelp_Command_Colorize"] = "Active/désactive la coloration des infobulles en fonction de la classe."
     L["Cmd_Colorize_Toggled"] = "La coloration par classe est maintenant "
     L["Cmd_OpenSettings"] = "Ouverture des paramètres..."
+    L["Debug_UnitUpdate"] = "Amélioration de l'infobulle ; Unité : %s ; Classe : %s ; Couleur : (%f, %f, %f) ; Guilde : %s"
+    L["Debug_TooltipClear"] = "Effacement de l'infobulle..."
+    L["Debug_None"] = "Aucun"
+    L["Debug_ShowTooltip"] = "Affichage de l'infobulle..."
 end
 
 -- German (deDE)
@@ -410,6 +430,10 @@ if GetLocale() == "deDE" then
     L["PrintHelp_Command_Colorize"] = "Schaltet die Tooltip-Einfärbung basierend auf der Klasse um."
     L["Cmd_Colorize_Toggled"] = "Die Klasseneinfärbung ist jetzt "
     L["Cmd_OpenSettings"] = "Einstellungen werden geöffnet..."
+    L["Debug_UnitUpdate"] = "Tooltip wird verbessert; Einheit: %s; Klasse: %s; Farbe: (%f, %f, %f); Gilde: %s"
+    L["Debug_TooltipClear"] = "Tooltip wird gelöscht..."
+    L["Debug_None"] = "Keine"
+    L["Debug_ShowTooltip"] = "Tooltip wird angezeigt..."
 end
 
 -- Return the localization values
